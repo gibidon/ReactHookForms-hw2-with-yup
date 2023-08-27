@@ -1,11 +1,11 @@
 import "./App.css"
 
-import FormWithValidation from "./components/FormWithValidation"
+import { HookFormElem } from "./components/HookFormElem"
 
 const App = () => {
   return (
     <>
-      <FormWithValidation />
+      <HookFormElem />
     </>
   )
 }
