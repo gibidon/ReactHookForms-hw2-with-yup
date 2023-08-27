@@ -9,7 +9,7 @@ export function HookFormElem() {
       .required("email должен быть")
       .matches(
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        "только email",
+        "обязателен знак собака, точка и домен",
       ),
     password: yup
       .string()
@@ -31,9 +31,6 @@ export function HookFormElem() {
   const onSubmit = (formData) => {
     console.log(formData)
   }
-  // let hasError =
-  //   errors.email === "" || errors.password === "" || errors.passwordConfirmation === ""
-  // console.log(hasError)
 
   return (
     <div>
