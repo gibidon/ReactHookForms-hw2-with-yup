@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useRef } from "react"
+import { useEffect } from "react"
 
 export function HookFormElem() {
   const schema = yup.object().shape({
@@ -22,15 +24,25 @@ export function HookFormElem() {
       .oneOf([yup.ref("password")], "пароли не сопадают"),
   })
   const {
-    watch,
     register,
     handleSubmit,
+    reset,
     formState: { errors, isDirty, isValid },
-  } = useForm({ resolver: yupResolver(schema) })
+  } = useForm({
+    resolver: yupResolver(schema),
+    // defaultValues: { email: "some@mail.com" },
+    mode: "all",
+  })
 
   const onSubmit = (formData) => {
     console.log(formData)
+    reset()
   }
+  let submitBtnRef = useRef()
+
+  useEffect(() => {
+    submitBtnRef.current.focus()
+  }, [isValid])
 
   return (
     <div>
@@ -58,7 +70,7 @@ export function HookFormElem() {
           placeholder="confirm password"
           {...register("passwordConfirmation")}
         ></input>
-        <button type="submit" disabled={!isDirty || !isValid}>
+        <button type="submit" disabled={!isDirty || !isValid} ref={submitBtnRef}>
           Отправить
         </button>
       </form>
